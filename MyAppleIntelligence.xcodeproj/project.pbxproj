@@ -6,6 +6,17 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		ACC22A252CDEA4910033EFD2 /* MLX in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A242CDEA4910033EFD2 /* MLX */; };
+		ACC22A272CDEA4910033EFD2 /* MLXFFT in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A262CDEA4910033EFD2 /* MLXFFT */; };
+		ACC22A292CDEA4910033EFD2 /* MLXFast in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A282CDEA4910033EFD2 /* MLXFast */; };
+		ACC22A2B2CDEA4910033EFD2 /* MLXLinalg in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A2A2CDEA4910033EFD2 /* MLXLinalg */; };
+		ACC22A2D2CDEA4910033EFD2 /* MLXNN in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A2C2CDEA4910033EFD2 /* MLXNN */; };
+		ACC22A362CDEA6370033EFD2 /* Transformers in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A352CDEA6370033EFD2 /* Transformers */; };
+		ACC22A462CDEA8A30033EFD2 /* MLXOptimizers in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A452CDEA8A30033EFD2 /* MLXOptimizers */; };
+		ACC22A4D2CDEA9D40033EFD2 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A4C2CDEA9D40033EFD2 /* MarkdownUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		ACD01E8B2CDA9A6B005B11E2 /* MyAppleIntelligence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyAppleIntelligence.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +34,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACC22A362CDEA6370033EFD2 /* Transformers in Frameworks */,
+				ACC22A292CDEA4910033EFD2 /* MLXFast in Frameworks */,
+				ACC22A2B2CDEA4910033EFD2 /* MLXLinalg in Frameworks */,
+				ACC22A4D2CDEA9D40033EFD2 /* MarkdownUI in Frameworks */,
+				ACC22A252CDEA4910033EFD2 /* MLX in Frameworks */,
+				ACC22A462CDEA8A30033EFD2 /* MLXOptimizers in Frameworks */,
+				ACC22A2D2CDEA4910033EFD2 /* MLXNN in Frameworks */,
+				ACC22A272CDEA4910033EFD2 /* MLXFFT in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +84,14 @@
 			);
 			name = MyAppleIntelligence;
 			packageProductDependencies = (
+				ACC22A242CDEA4910033EFD2 /* MLX */,
+				ACC22A262CDEA4910033EFD2 /* MLXFFT */,
+				ACC22A282CDEA4910033EFD2 /* MLXFast */,
+				ACC22A2A2CDEA4910033EFD2 /* MLXLinalg */,
+				ACC22A2C2CDEA4910033EFD2 /* MLXNN */,
+				ACC22A352CDEA6370033EFD2 /* Transformers */,
+				ACC22A452CDEA8A30033EFD2 /* MLXOptimizers */,
+				ACC22A4C2CDEA9D40033EFD2 /* MarkdownUI */,
 			);
 			productName = MyAppleIntelligence;
 			productReference = ACD01E8B2CDA9A6B005B11E2 /* MyAppleIntelligence.app */;
@@ -94,6 +121,11 @@
 			);
 			mainGroup = ACD01E822CDA9A6B005B11E2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ACC22A232CDEA4910033EFD2 /* XCRemoteSwiftPackageReference "mlx-swift" */,
+				ACC22A342CDEA6370033EFD2 /* XCRemoteSwiftPackageReference "swift-transformers" */,
+				ACC22A4B2CDEA9D40033EFD2 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ACD01E8C2CDA9A6B005B11E2 /* Products */;
 			projectDirPath = "";
@@ -339,6 +371,76 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ACC22A232CDEA4910033EFD2 /* XCRemoteSwiftPackageReference "mlx-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ml-explore/mlx-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.18.1;
+			};
+		};
+		ACC22A342CDEA6370033EFD2 /* XCRemoteSwiftPackageReference "swift-transformers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huggingface/swift-transformers";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.14;
+			};
+		};
+		ACC22A4B2CDEA9D40033EFD2 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ACC22A242CDEA4910033EFD2 /* MLX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACC22A232CDEA4910033EFD2 /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLX;
+		};
+		ACC22A262CDEA4910033EFD2 /* MLXFFT */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACC22A232CDEA4910033EFD2 /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLXFFT;
+		};
+		ACC22A282CDEA4910033EFD2 /* MLXFast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACC22A232CDEA4910033EFD2 /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLXFast;
+		};
+		ACC22A2A2CDEA4910033EFD2 /* MLXLinalg */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACC22A232CDEA4910033EFD2 /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLXLinalg;
+		};
+		ACC22A2C2CDEA4910033EFD2 /* MLXNN */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACC22A232CDEA4910033EFD2 /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLXNN;
+		};
+		ACC22A352CDEA6370033EFD2 /* Transformers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACC22A342CDEA6370033EFD2 /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Transformers;
+		};
+		ACC22A452CDEA8A30033EFD2 /* MLXOptimizers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACC22A232CDEA4910033EFD2 /* XCRemoteSwiftPackageReference "mlx-swift" */;
+			productName = MLXOptimizers;
+		};
+		ACC22A4C2CDEA9D40033EFD2 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACC22A4B2CDEA9D40033EFD2 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ACD01E832CDA9A6B005B11E2 /* Project object */;
 }
