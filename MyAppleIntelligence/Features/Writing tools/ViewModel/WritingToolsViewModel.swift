@@ -14,7 +14,11 @@ import Tokenizers
 
 @MainActor
 class WritingToolsViewModel: ObservableObject {
+    
     @Published var textInput = "The bestest TV show I've ever had wathed was The Game of Thrones seres. It ws s gdd!"
+    @Published var analyzingText = false
+    @Published var showingWritingTools = false
+    @Published var startDate: Date = Date()
     
     @Published var llm = LLMEvaluator()
     
@@ -90,6 +94,20 @@ class WritingToolsViewModel: ObservableObject {
     
     func generateText(text: String, option: WritingToolOption) async {
         guard !running else { return }
+        
+        self.startDate = Date()
+        self.showingWritingTools = false
+        
+        withAnimation {
+            analyzingText = true
+        }
+        
+        try? await Task.sleep(for: .seconds(2))
+        
+        withAnimation {
+            analyzingText = false
+        }
+
 
         running = true
         textInput = ""

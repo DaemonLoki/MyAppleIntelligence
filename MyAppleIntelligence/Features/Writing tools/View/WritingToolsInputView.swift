@@ -11,8 +11,6 @@ struct WritingToolsInputView: View {
     
     @ObservedObject var viewModel = WritingToolsViewModel()
     
-    @State private var showingWritingTools = false
-    
     var body: some View {
         VStack {
             HStack(alignment: .center) {
@@ -23,7 +21,7 @@ struct WritingToolsInputView: View {
                 Spacer()
                 
                 Button {
-                    showingWritingTools.toggle()
+                    viewModel.showingWritingTools.toggle()
                 } label: {
                     SiriIcon()
                         .frame(width: 32, height: 32)
@@ -31,15 +29,46 @@ struct WritingToolsInputView: View {
             }
             .padding()
             
-            TextEditor(text: $viewModel.textInput)
-                .scrollContentBackground(.hidden)
-                .foregroundStyle(.primary)
-                .padding()
-                .background(Color(uiColor: .secondarySystemBackground))
-                .clipShape(.rect(cornerRadius: 20, style: .continuous))
-                .padding()
+            ZStack {
+                TextEditor(text: $viewModel.textInput)
+                    .scrollContentBackground(.hidden)
+                    .foregroundStyle(.primary)
+                    .padding()
+                    .background(Color(uiColor: .secondarySystemBackground))
+                    .clipShape(.rect(cornerRadius: 20, style: .continuous))
+                    .padding()
+                    .overlay {
+                        if viewModel.analyzingText {
+                            ZStack {
+                                Color(.white)
+                                    .opacity(0.6)
+                                    .clipShape(.rect(cornerRadius: 20, style: .continuous))
+                                    .padding()
+                                
+                                TimelineView(.animation) { timeline in
+                                    let time = viewModel.startDate.distance(to: timeline.date)
+                                    
+                                    Color.white.opacity(0.5)
+                                        .clipShape(.rect(cornerRadius: 20, style: .continuous))
+                                        .padding()
+                                        .visualEffect { content, proxy in
+                                            content
+                                                .colorEffect(ShaderLibrary.shimmer(
+                                                    .float2(proxy.size),
+                                                    .float(time),
+                                                    .float(2.0),
+                                                    .float(0.9),
+                                                    .float(0.5)))
+                                        }
+                                }
+                            }
+                        }
+                    }
+                    
+                
+            }
         }
-        .sheet(isPresented: $showingWritingTools) {
+        .sheet(isPresented: $viewModel.showingWritingTools) {
             WritingToolsView(viewModel: viewModel)
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.hidden)
