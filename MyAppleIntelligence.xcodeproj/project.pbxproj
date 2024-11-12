@@ -15,6 +15,8 @@
 		ACC22A362CDEA6370033EFD2 /* Transformers in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A352CDEA6370033EFD2 /* Transformers */; };
 		ACC22A462CDEA8A30033EFD2 /* MLXOptimizers in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A452CDEA8A30033EFD2 /* MLXOptimizers */; };
 		ACC22A4D2CDEA9D40033EFD2 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = ACC22A4C2CDEA9D40033EFD2 /* MarkdownUI */; };
+		ACCD86F72CE103C400A369B1 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = ACCD86F62CE103C400A369B1 /* ZIPFoundation */; };
+		ACCD87092CE109D200A369B1 /* StableDiffusion in Frameworks */ = {isa = PBXBuildFile; productRef = ACCD87082CE109D200A369B1 /* StableDiffusion */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 				ACC22A462CDEA8A30033EFD2 /* MLXOptimizers in Frameworks */,
 				ACC22A2D2CDEA4910033EFD2 /* MLXNN in Frameworks */,
 				ACC22A272CDEA4910033EFD2 /* MLXFFT in Frameworks */,
+				ACCD86F72CE103C400A369B1 /* ZIPFoundation in Frameworks */,
+				ACCD87092CE109D200A369B1 /* StableDiffusion in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +96,8 @@
 				ACC22A352CDEA6370033EFD2 /* Transformers */,
 				ACC22A452CDEA8A30033EFD2 /* MLXOptimizers */,
 				ACC22A4C2CDEA9D40033EFD2 /* MarkdownUI */,
+				ACCD86F62CE103C400A369B1 /* ZIPFoundation */,
+				ACCD87082CE109D200A369B1 /* StableDiffusion */,
 			);
 			productName = MyAppleIntelligence;
 			productReference = ACD01E8B2CDA9A6B005B11E2 /* MyAppleIntelligence.app */;
@@ -125,6 +131,8 @@
 				ACC22A232CDEA4910033EFD2 /* XCRemoteSwiftPackageReference "mlx-swift" */,
 				ACC22A342CDEA6370033EFD2 /* XCRemoteSwiftPackageReference "swift-transformers" */,
 				ACC22A4B2CDEA9D40033EFD2 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				ACCD86F52CE103C400A369B1 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				ACCD87072CE109D200A369B1 /* XCRemoteSwiftPackageReference "ml-stable-diffusion" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ACD01E8C2CDA9A6B005B11E2 /* Products */;
@@ -397,6 +405,22 @@
 				minimumVersion = 2.4.1;
 			};
 		};
+		ACCD86F52CE103C400A369B1 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.19;
+			};
+		};
+		ACCD87072CE109D200A369B1 /* XCRemoteSwiftPackageReference "ml-stable-diffusion" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/ml-stable-diffusion";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -439,6 +463,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ACC22A4B2CDEA9D40033EFD2 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
+		};
+		ACCD86F62CE103C400A369B1 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACCD86F52CE103C400A369B1 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+		ACCD87082CE109D200A369B1 /* StableDiffusion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACCD87072CE109D200A369B1 /* XCRemoteSwiftPackageReference "ml-stable-diffusion" */;
+			productName = StableDiffusion;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
