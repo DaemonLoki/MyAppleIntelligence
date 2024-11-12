@@ -14,20 +14,7 @@ struct SiriIcon: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundStyle(
-                    MeshGradient(
-                        width: 3,
-                        height: 2,
-                        points: [
-                            [0, 0], [0.5, 0], [1, 0],
-                            //                    [0, 0.5], [0.5, 0.5], [1, 0.5],
-                            [0, 1], [0.5, 1], [1, 1]
-                        ],
-                        colors: [
-                            .yellow, .orange, .red,
-                            .blue, .indigo, .purple
-                            
-                        ]
-                    )
+                    MeshGradient.custom
                 )
         }
     }

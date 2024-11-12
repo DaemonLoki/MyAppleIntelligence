@@ -11,8 +11,6 @@ struct ImagePlaygroundView: View {
     
     @ObservedObject var viewModel = ImagePlaygroundViewModel()
     
-    @State private var generating = false
-    
     @State private var text = ""
     
     var body: some View {
@@ -44,8 +42,8 @@ struct ImagePlaygroundView: View {
             Spacer()
             
             ZStack {
-                if generating {
-                    if let imageName = viewModel.imageName {
+                if viewModel.generating {
+                    if let generatedImage = viewModel.generatedImage {
                         TimelineView(.animation) { timeline in
                             let x = (sin(timeline.date.timeIntervalSince1970) + 1) / 1
                             
@@ -66,7 +64,7 @@ struct ImagePlaygroundView: View {
                         .clipShape(.rect(cornerRadius: 20, style: .continuous))
                         .blur(radius: 6)
                         .overlay {
-                            Image(imageName)
+                            Image(uiImage: UIImage(cgImage: generatedImage))
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 235, height: 235)
@@ -97,11 +95,27 @@ struct ImagePlaygroundView: View {
                             .transition(.scale)
                     }
                 } else {
-                    Text("Enter text to generate an image.")
-                        .font(.title3)
-                        .foregroundStyle(.yellow)
-                        .padding(80)
-                        .multilineTextAlignment(.center)
+                    if viewModel.currentView == .ready {
+                        GradientLabelView(text: "Enter text to generate an image.")
+                            .transition(.scale)
+                    }
+                }
+                
+                ZStack {
+                    switch viewModel.currentView {
+                    case .loading:
+                        GradientLabelView(text: "Loading the model...")
+                            .transition(.scale)
+                    case .ready:
+                        EmptyView()
+                    case .error(let string):
+                        GradientLabelView(text: "Error: \(string)")
+                            .transition(.scale)
+                    }
+                }
+                
+                if viewModel.preparationPhase == .Downloading {
+                    GradientLabelView(text: String(format: "Downloading: %.1f", viewModel.downloadProgress * 100))
                 }
             }
             
@@ -129,65 +143,24 @@ struct ImagePlaygroundView: View {
                 .padding()
                 
                 HStack {
-                    VStack {
-                        Image("stefan")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                        
-                        Text("Comic")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                    ForEach(ImageStyle.allCases, id: \.self) { imageStyle in
+                        Button {
+                            viewModel.generate(prompt: "\(text) with the following style: \(imageStyle.prompt)")
+                        } label: {
+                            VStack {
+                                Image(imageStyle.imageName)
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(Circle())
+                                
+                                Text(imageStyle.title)
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, maxHeight: 50)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-                    
-                    VStack {
-                        Image("emin")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                        
-                        Text("Pretty")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-                    
-                    VStack {
-                        Image("abstract")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                        
-                        Text("Abstract")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-                    
-                    VStack {
-                        Image("haikei")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                        
-                        Text("Haikei")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-                    
-                    VStack {
-                        Image("santa")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                        
-                        Text("Santa")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 50)
                 }
                 .padding()
             }
@@ -207,27 +180,11 @@ struct ImagePlaygroundView: View {
                 .background(Color(uiColor: .secondarySystemBackground), in: Capsule())
                 
                 Button {
-                    // Person
-                } label: {
-                    Image(systemName: "person.fill")
-                        .padding(12)
-                }
-                .foregroundStyle(.primary)
-                .buttonStyle(.bordered)
-                .buttonBorderShape(.circle)
-                
-                Button {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
-                    
-                    withAnimation {
-                        generating = true
-                    }
-                    
-                    Task {
-                        try? await viewModel.loadImage()
-                    }
+
+                    viewModel.generate(prompt: text)
                 } label: {
-                    Image(systemName: "plus")
+                    Image(systemName: "arrow.up")
                         .padding(12)
                 }
                 .foregroundStyle(.primary)
@@ -248,6 +205,9 @@ struct ImagePlaygroundView: View {
             }
             .padding(.vertical, 10)
             .padding(.horizontal)
+        }
+        .task {
+            await viewModel.loadModel()
         }
     }
 }

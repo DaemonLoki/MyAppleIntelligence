@@ -105,11 +105,19 @@ func loadSynchronous(modelDirectory: URL) throws -> LLMModel {
 /// Load and return the model and tokenizer wrapped in a ``ModelContainer`` (provides
 /// thread safe access).
 public func loadModelContainer(
-    hub: HubApi = HubApi(), configuration: ModelConfiguration,
+    hub: HubApi = HubApi(),
+    configuration: ModelConfiguration,
     progressHandler: @Sendable @escaping (Progress) -> Void = { _ in }
 ) async throws -> ModelContainer {
     let modelDirectory = try await prepareModelDirectory(
-        hub: hub, configuration: configuration, progressHandler: progressHandler)
+        hub: hub,
+        configuration: configuration,
+        progressHandler: progressHandler
+    )
+    
     return try await ModelContainer(
-        hub: hub, modelDirectory: modelDirectory, configuration: configuration)
+        hub: hub,
+        modelDirectory: modelDirectory,
+        configuration: configuration
+    )
 }

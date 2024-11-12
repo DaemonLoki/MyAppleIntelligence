@@ -151,12 +151,50 @@ class WritingToolsViewModel: ObservableObject {
             if result.output != self.output {
                 self.output = result.output
             }
-            self.stat = " Tokens/second: \(String(format: "%.3f", result.tokensPerSecond))"
+            self.stat = "Tokens/second: \(String(format: "%.3f", result.tokensPerSecond))"
+            print("Tokens/second: \(String(format: "%.3f", result.tokensPerSecond))")
 
         } catch {
             textInput = "Failed: \(error)"
         }
 
         running = false
+    }
+    
+    func runModel(text: String, option: WritingToolOption) async {
+        do {
+        let modelContainer = try await load()
+        
+        let messages = [
+            ["role": "system", "content": systemPrompt],
+            ["role": "user", "content": option.generatePrompt(with: text)]
+        ]
+        let promptTokens = try await modelContainer.perform { _, tokenizer in
+            try tokenizer.applyChatTemplate(messages: messages)
+        }
+        
+        // each time you generate you will get something new
+        MLXRandom.seed(UInt64(Date.timeIntervalSinceReferenceDate * 1000))
+        
+        let result = await modelContainer.perform { model, tokenizer in
+            MyAppleIntelligence.generate(
+                promptTokens: promptTokens, parameters: generateParameters, model: model,
+                tokenizer: tokenizer, extraEOSTokens: modelConfiguration.extraEOSTokens
+            ) { tokens in
+                let text = tokenizer.decode(tokens: tokens)
+                Task { @MainActor in
+                    self.textInput = text
+                }
+                
+                if tokens.count >= maxTokens {
+                    return .stop
+                } else {
+                    return .more
+                }
+            }
+        }
+        } catch {
+            
+        }
     }
 }
