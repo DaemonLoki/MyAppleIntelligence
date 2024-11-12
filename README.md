@@ -17,6 +17,14 @@ It's not a perfectly running app, but in the end it's possible to use it to run 
 
 If you enjoy the project, feel free to [follow me on X](https://x.com/stefanjblos) to learn more about it.
 
+## Writing Tools demo
+
+https://github.com/user-attachments/assets/24b075d3-f645-45d2-b56e-cf1af25181fe
+
+## Image Playground demo
+
+https://github.com/user-attachments/assets/7819eda8-5e20-44ae-9bde-3b166446a912
+
 ## Helpful Resources
 
 Here are some of the resources that were incredibly helpful when creating this project:
