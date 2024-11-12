@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension String: Error {}
+//extension String: Error {}
 
 /// Returns an array of booleans that indicates at which steps a preview should be generated.
 ///

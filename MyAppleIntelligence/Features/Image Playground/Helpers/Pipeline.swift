@@ -49,13 +49,6 @@ class Pipeline {
         return false
     }
 
-//    var isSD3: Bool {
-//        if #available(macOS 14.0, iOS 17.0, *) {
-//            return (pipeline as? StableDiffusion3Pipeline) != nil
-//        }
-//        return false
-//    }
-
     var progress: StableDiffusionProgress? = nil {
         didSet {
             progressPublisher.value = progress

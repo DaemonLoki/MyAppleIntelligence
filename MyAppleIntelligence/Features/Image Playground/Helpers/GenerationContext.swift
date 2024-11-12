@@ -54,7 +54,7 @@ class GenerationContext: ObservableObject {
     }
 
     func generate(prompt: String) async throws -> GenerationResult {
-        guard let pipeline = pipeline else { throw "No pipeline" }
+        guard let pipeline = pipeline else { throw CustomError(message: "No pipeline") }
         return try pipeline.generate(
             prompt: prompt,
             negativePrompt: negativePrompt,

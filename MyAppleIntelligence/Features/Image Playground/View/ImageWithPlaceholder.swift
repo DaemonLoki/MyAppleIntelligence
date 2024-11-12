@@ -33,7 +33,7 @@ struct ImageWithPlaceholder: View {
                 }
                 ProgressView(label, value: fraction, total: 1).padding()
             })
-        case .complete(let lastPrompt, let image, _, let interval):
+        case .complete(_, let image, _, let interval):
             guard let theImage = image else {
                 return AnyView(Image(systemName: "exclamationmark.triangle").resizable())
             }

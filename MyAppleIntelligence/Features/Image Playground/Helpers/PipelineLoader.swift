@@ -172,7 +172,7 @@ extension PipelineLoader {
                                                          configuration: configuration,
                                                          reduceMemory: model.reduceMemory)
             } else {
-                throw "Stable Diffusion XL requires macOS 14"
+                throw CustomError(message: "Stable Diffusion XL requires macOS 14")
             }
         } else {
             pipeline = try StableDiffusionPipeline(resourcesAt: url,
