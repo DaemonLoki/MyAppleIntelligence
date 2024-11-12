@@ -26,5 +26,3 @@ Here are some of the resources that were incredibly helpful when creating this p
 - [mlx-swift-examples](https://github.com/ml-explore/mlx-swift-examples)
 - [Llama 3.2 3B Instruct 4bit-quantized model](https://huggingface.co/mlx-community/Llama-3.2-3B-Instruct-4bit)
 - [SDXL 1.0-base model](https://huggingface.co/apple/coreml-stable-diffusion-xl-base-ios)
-
-Here are some
