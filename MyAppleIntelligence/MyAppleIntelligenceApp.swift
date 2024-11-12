@@ -11,9 +11,7 @@ import SwiftUI
 struct MyAppleIntelligenceApp: App {
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            WritingToolsInputView()
-                .environment(DeviceStat())
+            ContentView()
         }
     }
 }
