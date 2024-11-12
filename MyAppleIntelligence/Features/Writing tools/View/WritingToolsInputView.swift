@@ -9,16 +9,31 @@ import SwiftUI
 
 struct WritingToolsInputView: View {
     
-    @ObservedObject var viewModel = WritingToolsViewModel()
+    @ObservedObject var navigationModel: NavigationModel
+    @StateObject var viewModel = WritingToolsViewModel()
     
     var body: some View {
         VStack {
             HStack(alignment: .center) {
+                Button {
+                    navigationModel.navigationPath.removeLast()
+                } label: {
+                    Image(systemName: "xmark")
+                        .resizable()
+                        .frame(width: 12, height: 12)
+                        .padding(8)
+                }
+                .buttonStyle(.bordered)
+                .buttonBorderShape(.circle)
+                .tint(.gray)
+                
                 Text("Input text")
                     .font(.title3)
                     .fontWeight(.semibold)
                 
                 Spacer()
+                
+                
                 
                 Button {
                     viewModel.showingWritingTools.toggle()
@@ -76,9 +91,10 @@ struct WritingToolsInputView: View {
         .task {
             _ = try? await viewModel.load()
         }
+        .navigationBarHidden(true)
     }
 }
 
 #Preview {
-    WritingToolsInputView()
+    WritingToolsInputView(navigationModel: NavigationModel())
 }

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ImagePlaygroundView: View {
     
-    @ObservedObject var viewModel = ImagePlaygroundViewModel()
+    @ObservedObject var navigationModel: NavigationModel
+    @StateObject var viewModel = ImagePlaygroundViewModel()
     
     @State private var text = ""
     
@@ -17,7 +18,7 @@ struct ImagePlaygroundView: View {
         VStack {
             HStack {
                 Button {
-                    print("Cancel")
+                    navigationModel.navigationPath.removeLast()
                 } label: {
                     Text("Cancel")
                 }
@@ -28,7 +29,7 @@ struct ImagePlaygroundView: View {
                 Spacer()
                 
                 Button {
-                    print("Done")
+                    navigationModel.navigationPath.removeLast()
                 } label: {
                     Text("Done")
                 }
@@ -209,9 +210,10 @@ struct ImagePlaygroundView: View {
         .task {
             await viewModel.loadModel()
         }
+        .navigationBarHidden(true)
     }
 }
 
 #Preview {
-    ImagePlaygroundView()
+    ImagePlaygroundView(navigationModel: NavigationModel())
 }
